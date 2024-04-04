@@ -73,39 +73,48 @@ Fake_News> db.fake_news.find({_id: ObjectId('660f0732db93926fa9403e99')})
 ```
 4. Индексы
 ```
-Fake_News> db.MallCustomers.find({id:20800}).explain('executionStats')
+Fake_News> db.fake_news.find({id:20800}).explain('executionStats')
 {
   explainVersion: '1',
   queryPlanner: {
-    namespace: 'Fake_News.MallCustomers',
+    namespace: 'Fake_News.fake_news',
     indexFilterSet: false,
     parsedQuery: { id: { '$eq': 20800 } },
+    queryHash: '1508FBC9',
+    planCacheKey: '1508FBC9',
     maxIndexedOrSolutionsReached: false,
     maxIndexedAndSolutionsReached: false,
     maxScansToExplodeReached: false,
-    winningPlan: { stage: 'EOF' },
+    winningPlan: {
+      stage: 'COLLSCAN',
+      filter: { id: { '$eq': 20800 } },
+      direction: 'forward'
+    },
     rejectedPlans: []
   },
   executionStats: {
     executionSuccess: true,
-    nReturned: 0,
-    executionTimeMillis: 0,
+    nReturned: 1,
+    executionTimeMillis: 9,
     totalKeysExamined: 0,
-    totalDocsExamined: 0,
+    totalDocsExamined: 5200,
     executionStages: {
-      stage: 'EOF',
-      nReturned: 0,
+      stage: 'COLLSCAN',
+      filter: { id: { '$eq': 20800 } },
+      nReturned: 1,
       executionTimeMillisEstimate: 0,
-      works: 1,
-      advanced: 0,
-      needTime: 0,
+      works: 5201,
+      advanced: 1,
+      needTime: 5199,
       needYield: 0,
-      saveState: 0,
-      restoreState: 0,
-      isEOF: 1
+      saveState: 5,
+      restoreState: 5,
+      isEOF: 1,
+      direction: 'forward',
+      docsExamined: 5200
     }
   },
-  command: { find: 'MallCustomers', filter: { id: 20800 }, '$db': 'Fake_News' },
+  command: { find: 'fake_news', filter: { id: 20800 }, '$db': 'Fake_News' },
   serverInfo: {
     host: '9bd9e288a8fc',
     port: 27017,
@@ -127,43 +136,86 @@ Fake_News> db.MallCustomers.find({id:20800}).explain('executionStats')
 }
 ```
 
-`totalDocsExamined: 0` - видим, что запрос и так исполнен быстро, создание индексов не требуется, но мы создадим т.к. того требует задание.
+`totalDocsExamined: 5201` - видим, что запрос исполнен проходом по всей базе, создадим индекс как того требует задание.
 ```
-Fake_News> db.fake_news.createIndex({id:20800})
-id_20800
-Fake_News> db.MallCustomers.find({id:20800}).explain('executionStats')
+Fake_News> db.fake_news.find({id:20800}).explain('executionStats')
 {
   explainVersion: '1',
   queryPlanner: {
-    namespace: 'Fake_News.MallCustomers',
+    namespace: 'Fake_News.fake_news',
     indexFilterSet: false,
     parsedQuery: { id: { '$eq': 20800 } },
+    queryHash: '1508FBC9',
+    planCacheKey: 'C120A649',
     maxIndexedOrSolutionsReached: false,
     maxIndexedAndSolutionsReached: false,
     maxScansToExplodeReached: false,
-    winningPlan: { stage: 'EOF' },
+    winningPlan: {
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { id: 20800 },
+        indexName: 'id_20800',
+        isMultiKey: false,
+        multiKeyPaths: { id: [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { id: [ '[20800, 20800]' ] }
+      }
+    },
     rejectedPlans: []
   },
   executionStats: {
     executionSuccess: true,
-    nReturned: 0,
-    executionTimeMillis: 0,
-    totalKeysExamined: 0,
-    totalDocsExamined: 0,
+    nReturned: 1,
+    executionTimeMillis: 2,
+    totalKeysExamined: 1,
+    totalDocsExamined: 1,
     executionStages: {
-      stage: 'EOF',
-      nReturned: 0,
+      stage: 'FETCH',
+      nReturned: 1,
       executionTimeMillisEstimate: 0,
-      works: 1,
-      advanced: 0,
+      works: 2,
+      advanced: 1,
       needTime: 0,
       needYield: 0,
       saveState: 0,
       restoreState: 0,
-      isEOF: 1
+      isEOF: 1,
+      docsExamined: 1,
+      alreadyHasObj: 0,
+      inputStage: {
+        stage: 'IXSCAN',
+        nReturned: 1,
+        executionTimeMillisEstimate: 0,
+        works: 2,
+        advanced: 1,
+        needTime: 0,
+        needYield: 0,
+        saveState: 0,
+        restoreState: 0,
+        isEOF: 1,
+        keyPattern: { id: 20800 },
+        indexName: 'id_20800',
+        isMultiKey: false,
+        multiKeyPaths: { id: [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { id: [ '[20800, 20800]' ] },
+        keysExamined: 1,
+        seeks: 1,
+        dupsTested: 0,
+        dupsDropped: 0
+      }
     }
   },
-  command: { find: 'MallCustomers', filter: { id: 20800 }, '$db': 'Fake_News' },
+  command: { find: 'fake_news', filter: { id: 20800 }, '$db': 'Fake_News' },
   serverInfo: {
     host: '9bd9e288a8fc',
     port: 27017,
@@ -184,3 +236,4 @@ Fake_News> db.MallCustomers.find({id:20800}).explain('executionStats')
   ok: 1
 }
 ```
+`totalDocsExamined: 1` - ура, индекс помог и запрос выполнен в разы быстрее
