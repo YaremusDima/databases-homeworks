@@ -138,6 +138,8 @@ Fake_News> db.fake_news.find({id:20800}).explain('executionStats')
 
 `totalDocsExamined: 5201` - видим, что запрос исполнен проходом по всей базе, создадим индекс как того требует задание.
 ```
+Fake_news> db.fake_news.createIndex({id:20800})
+id_20800
 Fake_News> db.fake_news.find({id:20800}).explain('executionStats')
 {
   explainVersion: '1',
