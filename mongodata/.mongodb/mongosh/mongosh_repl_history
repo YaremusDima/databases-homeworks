@@ -1,0 +1,70 @@
+db.titanic.find({Age:22}).explain('executionStats')
+db.titanic.createIndex({Age:22})
+db.titanic.find({Age:22}).explain('executionStats')
+db.fake_news.createIndex({Age:22})
+db.titanic.find({Age:22}).explain('executionStats')
+db.titanic.find({Age:22})
+db.titanic.findOne()
+db.fake_news.find({id:20800}).explain('executionStats')
+db.fake_news.createIndex({id:20800})
+{ explainVersion: '1', queryPlanner: { namespace: 'Fake_News.fake_news', indexFilterSet: false, parsedQuery: { id: { '$eq': 20800 } }, queryHash: '1508FBC9', planCacheKey: '1508FBC9', maxIndexedOrSolutionsReached: false, maxIndexedAndSolutionsReached: false, maxScansToExplodeReached: false, winningPlan: { stage: 'COLLSCAN', filter: { id: { '$eq': 20800 } }, direction: 'forward' }, rejectedPlans: [] }, executionStats: { executionSuccess: true, nReturned: 1, executionTimeMillis: 9, totalKeysExamined: 0, totalDocsExamined: 5200, executionStages: { stage: 'COLLSCAN', filter: { id: { '$eq': 20800 } }, nReturned: 1, executionTimeMillisEstimate: 0, works: 5201, advanced: 1, needTime: 5199, needYield: 0, saveState: 5, restoreState: 5, isEOF: 1, direction: 'forward', docsExamined: 5200 } }, command: { find: 'fake_news', filter: { id: 20800 }, '$db': 'Fake_News' }, serverInfo: { host: '9bd9e288a8fc', port: 27017, version: '7.0.8', gitVersion: 'c5d33e55ba38d98e2f48765ec4e55338d67a4a64' }, serverParameters: { internalQueryFacetBufferSizeBytes: 104857600, internalQueryFacetMaxOutputDocSizeBytes: 104857600, internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600, internalDocumentSourceGroupMaxMemoryBytes: 104857600, internalQueryMaxBlockingSortMemoryUsageBytes: 104857600, internalQueryProhibitBlockingMergeOnMongoS: 0, internalQueryMaxAddToSetBytes: 104857600, internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600, internalQueryFrameworkControl: 'trySbeRestricted' }, ok: 1 } )
+db.fake_news.createIndex({author:'David Streitfeld'Fake_News> db.fake_news.find({id:20800}).explain('executionStats')})
+db.fake_news.find({id:20800}).explain('executionStats')
+db.fake_news.dropIndex('id_20800')
+db.fake_news.createIndex({author:'David Streitfeld'})
+а
+db.fake_news.find({id:20800}).explain('
+db.fake_news.find({author:'David Streitfeld'}).explain('executionStats')
+db.fake_news.find({id:20800}).explain('executionStats')
+db.fake_news.find({id:13372280}).explain('executionStats')
+db.titanic.createIndex({Sex:'male'})
+db.titanic.createIndex({'Sex':'male'})
+db.fake_news.createIndex({Sex:'male'})
+db.titanic.find({Sex:'male'}).explain('executionStats')
+db.titanic.find({Sex:'male'})
+db.MallCustomers.find({'Sex':'male'})
+db.MallCustomers.find({Sex:'male'})
+db.MallCustomers.find({Sex:'male'}).explain('executionStats')
+db.titanic.findOne()
+db.titanic.updateOne({ _id: ObjectId('660f0d1b521430a37c125b39') }, { $set: { Sex: 'hexadetrine' } } )
+db.titanic.updateOne({ _id: ObjectId('660f0d1b521430a37c125b3') }, { $set: { Sex: 1 }})
+db.titanic.updateOne({ _id: ObjectId('660f0d1b521430a37c125b3') }, { $set: { Sex: 'hexadetrine' } } )
+db.titanic.findOne()
+db.MallCustomers.find({id:20800}).explain('executionStats')
+db.fake_news.createIndex({id:20800})
+db.MallCustomers.find({id:20800}).explain('executionStats')
+db.MallCustomers.find({text:'oh my...'}).explain('executionStats')
+db.MallCustomers.find({id:13372280}).explain('executionStats')
+db.fake_news.find({_id: ObjectId('660f0732db93926fa9403e99')})
+db.fake_news.deleteOne({_id: ObjectId('660f0732db93926fa9403e99')})
+db.fake_news.find({_id: ObjectId('660f0732db93926fa9403e99')})
+db.fake_news.updateOne({_id: ObjectId('660f0732db93926fa9403e99')}, {$set: {title: 'my bad romance'}})
+db.fake_news.find({_id: ObjectId('660f0732db93926fa9403e99')})
+db.fake_news.find({_id: '660f0732db93926fa9403e99'})
+db.fake_news.findOne('660f0732db93926fa9403e99')
+db.fake_news.insertOne({id:13372280, title: 'my romance', author: 'dimas', text: 'oh my ...'})
+db.fake_news.findOne()
+db.fake_news.findOne
+show collections
+show
+db
+db.findOne
+db.findOne()
+db
+db.Fake_News.findOne()
+show collections
+db.Fake_News.findOne()
+findOne()
+db.Fake_News.findOne()
+db.MallCustomers.findOne()
+db.Fake_News.find({ })
+db.Fake_News.find({ "_id": ObjectId("660eee332c0a22655e7b2da9") })
+db.Fake_News
+db
+jws.findOne()
+db.MallCustomers.findOne()
+db.Fake_News.find({ })
+db.Fake_News.find({ "_id": ObjectId("660eee332c0a22655e7b2da9") })
+db.Fake_News
+db
+j
